@@ -1,0 +1,24 @@
+﻿<Application x:Class="DrogueriaPOS.WPF.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:DrogueriaPOS.WPF"
+             xmlns:converters="clr-namespace:DrogueriaPOS.WPF.Converters"
+             xmlns:viewModels="clr-namespace:DrogueriaPOS.WPF.ViewModels">
+
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Estilos de Colores -->
+                <ResourceDictionary Source="Resources/Styles/Colors.xaml"/>
+
+                <!-- Estilos de Fuentes -->
+                <ResourceDictionary Source="Resources/Styles/Fonts.xaml"/>
+
+                <!-- Estilos de Botones -->
+                <ResourceDictionary Source="Resources/Styles/Buttons.xaml"/>
+
+                <!-- Aquí agregarás más recursos según los vayas creando -->
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>

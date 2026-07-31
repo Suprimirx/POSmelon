@@ -1,0 +1,96 @@
+## .NET / Visual Studio ##
+[Bb]in/
+[Oo]bj/
+[Dd]ebug/
+[Rr]elease/
+x64/
+x86/
+[Ww]in32/
+[Aa][Rr][Mm]/
+[Aa][Rr][Mm]64/
+[Bb]uild/
+bld/
+msbuild.log
+msbuild.err
+msbuild.wrn
+
+# Visual Studio
+.vs/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+*.vssscc
+
+# Rider / JetBrains
+.idea/
+*.sln.iml
+
+# VS Code (opcional, quítalo si versionas configuración compartida)
+.vscode/
+
+## EF Core / Migraciones ##
+# Las migraciones SÍ deben versionarse (no las ignores)
+# Pero ignora backups de bases de datos generadas localmente
+
+## SQLite - MUY IMPORTANTE ##
+# Nunca subas la base de datos real con datos de producción/pruebas
+*.db
+*.db-shm
+*.db-wal
+*.sqlite
+*.sqlite3
+*.sqlite3-journal
+
+## Secretos y configuración local ##
+appsettings.Development.json
+appsettings.Local.json
+appsettings.*.local.json
+*.pfx
+*.snk
+secrets.json
+
+## Publicación / Empaquetado ##
+publish/
+*.publishsettings
+*.azurePubxml
+PublishProfiles/
+*.pubxml
+*.pubxml.user
+
+## Logs ##
+*.log
+logs/
+
+## Resultados de pruebas (dotnet test) ##
+TestResults/
+[Tt]est[Rr]esult*/
+*.trx
+*.coverage
+*.coveragexml
+
+## NuGet ##
+*.nupkg
+**/[Pp]ackages/*
+!**/[Pp]ackages/build/
+# Si usas PackageReference (lo normal desde .NET Core+), no necesitas excluir packages.config
+project.lock.json
+project.fragment.lock.json
+artifacts/
+
+## ReSharper ##
+_ReSharper*/
+*.[Rr]e[Ss]harper
+*.DotSettings.user
+
+## Archivos de OS ##
+.DS_Store
+Thumbs.db
+desktop.ini
+
+## Archivos temporales ##
+*.tmp
+*.temp
+*.bak
+*.cache
+*~

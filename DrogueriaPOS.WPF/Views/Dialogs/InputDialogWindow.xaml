@@ -1,0 +1,66 @@
+﻿<Window x:Class="DrogueriaPOS.WPF.Views.Dialogs.InputDialogWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Entrada" 
+        Height="200" 
+        Width="400"
+        ResizeMode="NoResize"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+
+    <Border Background="{StaticResource SurfaceBrush}"
+            BorderBrush="{StaticResource BorderBrush}"
+            BorderThickness="1"
+            CornerRadius="8"
+            Padding="20">
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Título -->
+            <TextBlock Grid.Row="0"
+                       Text="{Binding RelativeSource={RelativeSource AncestorType=Window}, Path=Title}"
+                       Style="{StaticResource HeadingTextStyle}"
+                       Margin="0,0,0,10"/>
+
+            <!-- Mensaje -->
+            <TextBlock Grid.Row="1"
+                       x:Name="MessageTextBlock"
+                       TextWrapping="Wrap"
+                       Style="{StaticResource BodyTextStyle}"
+                       Margin="0,0,0,15"/>
+
+            <!-- Input -->
+            <TextBox Grid.Row="2"
+                     x:Name="InputTextBox"
+                     VerticalAlignment="Top"
+                     Padding="10"
+                     FontSize="{StaticResource FontSizeNormal}"/>
+
+            <!-- Botones -->
+            <StackPanel Grid.Row="3"
+                       Orientation="Horizontal"
+                       HorizontalAlignment="Right"
+                       Margin="0,20,0,0">
+
+                <Button Content="Cancelar"
+                        Width="100"
+                        Margin="0,0,10,0"
+                        Style="{StaticResource SecondaryButton}"
+                        Click="CancelButton_Click"/>
+
+                <Button Content="Aceptar"
+                        Width="100"
+                        Style="{StaticResource PrimaryButton}"
+                        Click="OkButton_Click"
+                        IsDefault="True"/>
+            </StackPanel>
+        </Grid>
+    </Border>
+</Window>

@@ -1,0 +1,318 @@
+﻿<UserControl x:Class="DrogueriaPOS.WPF.Views.CashRegister.CloseSessionView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d"
+             d:DesignHeight="700" d:DesignWidth="900">
+
+    <ScrollViewer VerticalScrollBarVisibility="Auto">
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+            </Grid.RowDefinitions>
+
+            <!-- Encabezado -->
+            <Border Grid.Row="0"
+                    Background="{StaticResource SurfaceBrush}"
+                    Padding="20,15"
+                    Margin="0,0,0,20"
+                    CornerRadius="8">
+                <TextBlock Text="🔒 Cerrar Caja"
+                           Style="{StaticResource TitleTextStyle}"/>
+            </Border>
+
+            <!-- Contenido -->
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="20"/>
+                    <ColumnDefinition Width="340"/>
+                </Grid.ColumnDefinitions>
+
+                <!-- ============================================ -->
+                <!-- COLUMNA IZQUIERDA: RESUMEN DE SESIÓN        -->
+                <!-- ============================================ -->
+                <StackPanel Grid.Column="0">
+
+                    <!-- Información general -->
+                    <Border Background="{StaticResource SurfaceBrush}"
+                            Padding="20"
+                            CornerRadius="8"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="Información de la Sesión"
+                                       Style="{StaticResource SubtitleTextStyle}"
+                                       Margin="0,0,0,20"/>
+
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="👤 Cajero:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding CashierName}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           FontWeight="SemiBold"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="📅 Apertura:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding OpeningDate}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           FontWeight="SemiBold"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="⏱️ Duración:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding OpenDuration, StringFormat='{}{0:hh\\:mm\\:ss}'}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           FontWeight="SemiBold"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Resumen de ventas -->
+                    <Border Background="{StaticResource SurfaceBrush}"
+                            Padding="20"
+                            CornerRadius="8">
+                        <StackPanel>
+                            <TextBlock Text="Resumen de Ventas"
+                                       Style="{StaticResource SubtitleTextStyle}"
+                                       Margin="0,0,0,20"/>
+
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🧾 Facturas:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1" Text="{Binding InvoiceCount}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           FontWeight="SemiBold"/>
+                            </Grid>
+
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="💰 Total ventas:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding TotalSales, StringFormat=C2}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           FontWeight="SemiBold"
+                                           Foreground="{StaticResource PrimaryBrush}"/>
+                            </Grid>
+
+                            <Separator Background="{StaticResource DividerBrush}" Margin="0,10"/>
+
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🏁 Monto inicial:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding InitialCashAmount, StringFormat=C2}"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           FontWeight="SemiBold"/>
+                            </Grid>
+
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🎯 Efectivo esperado:"
+                                           Style="{StaticResource BodyTextStyle}"
+                                           Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1"
+                                           Text="{Binding ExpectedCash, StringFormat=C2}"
+                                           Style="{StaticResource HeadingTextStyle}"
+                                           Foreground="{StaticResource PrimaryBrush}"/>
+                            </Grid>
+
+                            <Grid Margin="0,10,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="180"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="🎯 Dinero en transferencia:"
+                                            Style="{StaticResource BodyTextStyle}"
+                                            Foreground="{StaticResource TextSecondaryBrush}"/>
+                                <TextBlock Grid.Column="1"
+                                            Text="{Binding TotalTransferSales, StringFormat=C2}"
+                                            Style="{StaticResource HeadingTextStyle}"
+                                            Foreground="{StaticResource PrimaryBrush}"/>
+                            </Grid>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+
+                <!-- ============================================ -->
+                <!-- COLUMNA DERECHA: CONTEO Y CIERRE            -->
+                <!-- ============================================ -->
+                <StackPanel Grid.Column="2">
+
+                    <!-- Conteo de efectivo -->
+                    <Border Background="{StaticResource SurfaceBrush}"
+                            Padding="20"
+                            CornerRadius="8"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="Conteo de Efectivo"
+                                       Style="{StaticResource SubtitleTextStyle}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock Text="Ingrese el efectivo real contado en caja"
+                                       Style="{StaticResource CaptionTextStyle}"
+                                       Margin="0,0,0,20"/>
+
+                            <TextBox Text="{Binding ActualCash, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"
+                                     Padding="12,14"
+                                     FontSize="{StaticResource FontSizeLarge}"
+                                     FontWeight="SemiBold"
+                                     TextAlignment="Right"
+                                     BorderBrush="{StaticResource BorderBrush}"
+                                     BorderThickness="1"
+                                     Margin="0,0,0,15"/>
+
+                            <!-- Diferencia en tiempo real -->
+                            <Border CornerRadius="4" Padding="15,12">
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{StaticResource FocusBrush}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding HasShortage}" Value="True">
+                                                <Setter Property="Background" Value="#FFEBEE"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding HasSurplus}" Value="True">
+                                                <Setter Property="Background" Value="#FFF8E1"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <Grid>
+                                    <TextBlock Text="Diferencia:"
+                                               Style="{StaticResource HeadingTextStyle}"
+                                               VerticalAlignment="Center"/>
+                                    <StackPanel HorizontalAlignment="Right"
+                                                Orientation="Horizontal">
+
+                                        <TextBlock Text="▼ Faltante"
+                                                   FontSize="{StaticResource FontSizeSmall}"
+                                                   Foreground="{StaticResource ErrorBrush}"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,8,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasShortage}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+
+                                        <TextBlock Text="▲ Sobrante"
+                                                   FontSize="{StaticResource FontSizeSmall}"
+                                                   Foreground="{StaticResource WarningBrush}"
+                                                   VerticalAlignment="Center"
+                                                   Margin="0,0,8,0">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasSurplus}" Value="True">
+                                                            <Setter Property="Visibility" Value="Visible"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+
+                                        <TextBlock Text="{Binding Difference, StringFormat='{}{0:C}'}"
+                                                   FontSize="{StaticResource FontSizeMedium}"
+                                                   FontWeight="Bold"
+                                                   VerticalAlignment="Center">
+                                            <TextBlock.Style>
+                                                <Style TargetType="TextBlock">
+                                                    <Setter Property="Foreground" Value="{StaticResource PrimaryBrush}"/>
+                                                    <Style.Triggers>
+                                                        <DataTrigger Binding="{Binding HasShortage}" Value="True">
+                                                            <Setter Property="Foreground" Value="{StaticResource ErrorBrush}"/>
+                                                        </DataTrigger>
+                                                        <DataTrigger Binding="{Binding HasSurplus}" Value="True">
+                                                            <Setter Property="Foreground" Value="{StaticResource WarningBrush}"/>
+                                                        </DataTrigger>
+                                                    </Style.Triggers>
+                                                </Style>
+                                            </TextBlock.Style>
+                                        </TextBlock>
+                                    </StackPanel>
+                                </Grid>
+                            </Border>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Observaciones -->
+                    <Border Background="{StaticResource SurfaceBrush}"
+                            Padding="20"
+                            CornerRadius="8"
+                            Margin="0,0,0,15">
+                        <StackPanel>
+                            <TextBlock Text="Observaciones"
+                                       Style="{StaticResource SubtitleTextStyle}"
+                                       Margin="0,0,0,5"/>
+                            <TextBlock Text="Opcional"
+                                       Style="{StaticResource CaptionTextStyle}"
+                                       Margin="0,0,0,15"/>
+                            <TextBox Text="{Binding Observations, UpdateSourceTrigger=PropertyChanged}"
+                                     Padding="12,10"
+                                     FontSize="{StaticResource FontSizeNormal}"
+                                     BorderBrush="{StaticResource BorderBrush}"
+                                     BorderThickness="1"
+                                     AcceptsReturn="True"
+                                     TextWrapping="Wrap"
+                                     Height="80"
+                                     VerticalScrollBarVisibility="Auto"
+                                     MaxLength="500"/>
+                        </StackPanel>
+                    </Border>
+
+                    <!-- Botón cerrar caja -->
+                    <Button Content="🔒 Cerrar Caja"
+                            Style="{StaticResource DangerButton}"
+                            HorizontalAlignment="Stretch"
+                            Padding="16,14"
+                            FontSize="{StaticResource FontSizeMedium}"
+                            Command="{Binding CloseSessionCommand}"/>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </ScrollViewer>
+</UserControl>

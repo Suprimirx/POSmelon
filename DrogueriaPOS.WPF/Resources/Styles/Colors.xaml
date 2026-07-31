@@ -1,0 +1,103 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- ============================================ -->
+    <!-- PALETA DE COLORES PRINCIPAL                  -->
+    <!-- ============================================ -->
+
+    <!-- Colores Primarios -->
+    <Color x:Key="PrimaryColor">#2E7D32</Color>
+    <!-- Verde salud -->
+    <Color x:Key="PrimaryDarkColor">#1B5E20</Color>
+    <!-- Verde oscuro -->
+    <Color x:Key="PrimaryLightColor">#4CAF50</Color>
+    <!-- Verde claro -->
+
+    <!-- Colores Secundarios -->
+    <Color x:Key="SecondaryColor">#1976D2</Color>
+    <!-- Azul -->
+    <Color x:Key="SecondaryDarkColor">#0D47A1</Color>
+    <!-- Azul oscuro -->
+    <Color x:Key="SecondaryLightColor">#42A5F5</Color>
+    <!-- Azul claro -->
+
+    <!-- Colores de Fondo -->
+    <Color x:Key="BackgroundColor">#FAFAFA</Color>
+    <!-- Gris muy claro -->
+    <Color x:Key="SurfaceColor">#FFFFFF</Color>
+    <!-- Blanco -->
+    <Color x:Key="CardColor">#FFFFFF</Color>
+    <!-- Blanco para tarjetas -->
+
+    <!-- Colores de Texto -->
+    <Color x:Key="TextPrimaryColor">#212121</Color>
+    <!-- Negro suave -->
+    <Color x:Key="TextSecondaryColor">#757575</Color>
+    <!-- Gris -->
+    <Color x:Key="TextDisabledColor">#BDBDBD</Color>
+    <!-- Gris claro -->
+    <Color x:Key="TextOnPrimaryColor">#FFFFFF</Color>
+    <!-- Blanco -->
+
+    <!-- Colores de Estado -->
+    <Color x:Key="SuccessColor">#4CAF50</Color>
+    <!-- Verde -->
+    <Color x:Key="WarningColor">#FF9800</Color>
+    <!-- Naranja -->
+    <Color x:Key="ErrorColor">#F44336</Color>
+    <!-- Rojo -->
+    <Color x:Key="InfoColor">#2196F3</Color>
+    <!-- Azul -->
+
+    <!-- Colores de Bordes -->
+    <Color x:Key="BorderColor">#E0E0E0</Color>
+    <!-- Gris claro -->
+    <Color x:Key="DividerColor">#EEEEEE</Color>
+    <!-- Gris muy claro -->
+
+    <!-- Colores de Hover/Focus -->
+    <Color x:Key="HoverColor">#F5F5F5</Color>
+    <!-- Gris suave -->
+    <Color x:Key="FocusColor">#E8F5E9</Color>
+    <!-- Verde muy claro -->
+
+    <!-- ============================================ -->
+    <!-- BRUSHES (SolidColorBrush)                    -->
+    <!-- ============================================ -->
+
+    <!-- Brushes Primarios -->
+    <SolidColorBrush x:Key="PrimaryBrush" Color="{StaticResource PrimaryColor}"/>
+    <SolidColorBrush x:Key="PrimaryDarkBrush" Color="{StaticResource PrimaryDarkColor}"/>
+    <SolidColorBrush x:Key="PrimaryLightBrush" Color="{StaticResource PrimaryLightColor}"/>
+
+    <!-- Brushes Secundarios -->
+    <SolidColorBrush x:Key="SecondaryBrush" Color="{StaticResource SecondaryColor}"/>
+    <SolidColorBrush x:Key="SecondaryDarkBrush" Color="{StaticResource SecondaryDarkColor}"/>
+    <SolidColorBrush x:Key="SecondaryLightBrush" Color="{StaticResource SecondaryLightColor}"/>
+
+    <!-- Brushes de Fondo -->
+    <SolidColorBrush x:Key="BackgroundBrush" Color="{StaticResource BackgroundColor}"/>
+    <SolidColorBrush x:Key="SurfaceBrush" Color="{StaticResource SurfaceColor}"/>
+    <SolidColorBrush x:Key="CardBrush" Color="{StaticResource CardColor}"/>
+
+    <!-- Brushes de Texto -->
+    <SolidColorBrush x:Key="TextPrimaryBrush" Color="{StaticResource TextPrimaryColor}"/>
+    <SolidColorBrush x:Key="TextSecondaryBrush" Color="{StaticResource TextSecondaryColor}"/>
+    <SolidColorBrush x:Key="TextDisabledBrush" Color="{StaticResource TextDisabledColor}"/>
+    <SolidColorBrush x:Key="TextOnPrimaryBrush" Color="{StaticResource TextOnPrimaryColor}"/>
+
+    <!-- Brushes de Estado -->
+    <SolidColorBrush x:Key="SuccessBrush" Color="{StaticResource SuccessColor}"/>
+    <SolidColorBrush x:Key="WarningBrush" Color="{StaticResource WarningColor}"/>
+    <SolidColorBrush x:Key="ErrorBrush" Color="{StaticResource ErrorColor}"/>
+    <SolidColorBrush x:Key="InfoBrush" Color="{StaticResource InfoColor}"/>
+
+    <!-- Brushes de Bordes -->
+    <SolidColorBrush x:Key="BorderBrush" Color="{StaticResource BorderColor}"/>
+    <SolidColorBrush x:Key="DividerBrush" Color="{StaticResource DividerColor}"/>
+
+    <!-- Brushes de Hover/Focus -->
+    <SolidColorBrush x:Key="HoverBrush" Color="{StaticResource HoverColor}"/>
+    <SolidColorBrush x:Key="FocusBrush" Color="{StaticResource FocusColor}"/>
+
+</ResourceDictionary>

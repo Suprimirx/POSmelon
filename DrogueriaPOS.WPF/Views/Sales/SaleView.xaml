@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:DrogueriaPOS.WPF.Controls"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="1200">
 
@@ -42,114 +43,115 @@
     </UserControl.Resources>
 
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <!-- Panel izquierdo: búsqueda + líneas -->
-            <ColumnDefinition Width="20"/>
-            <!-- Separador -->
-            <ColumnDefinition Width="340"/>
-            <!-- Panel derecho: totales -->
-        </Grid.ColumnDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <!-- Panel izquierdo: búsqueda + líneas -->
+                <ColumnDefinition Width="20"/>
+                <!-- Separador -->
+                <ColumnDefinition Width="340"/>
+                <!-- Panel derecho: totales -->
+            </Grid.ColumnDefinitions>
 
-        <!-- ============================================ -->
-        <!-- PANEL IZQUIERDO: BÚSQUEDA Y LÍNEAS          -->
-        <!-- ============================================ -->
-        <Grid Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
+            <!-- ============================================ -->
+            <!-- PANEL IZQUIERDO: BÚSQUEDA Y LÍNEAS          -->
+            <!-- ============================================ -->
+            <Grid Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Encabezado -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Búsqueda -->
+                    <RowDefinition Height="*"/>
+                    <!-- Líneas de venta -->
+                </Grid.RowDefinitions>
+
                 <!-- Encabezado -->
-                <RowDefinition Height="Auto"/>
-                <!-- Búsqueda -->
-                <RowDefinition Height="*"/>
-                <!-- Líneas de venta -->
-            </Grid.RowDefinitions>
-
-            <!-- Encabezado -->
-            <Border Grid.Row="0"
+                <Border Grid.Row="0"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="20,15"
                     Margin="0,0,0,10"
                     CornerRadius="8">
-                <TextBlock Text="🛒 Nueva Venta"
+                    <TextBlock Text="🛒 Nueva Venta"
                            Style="{StaticResource TitleTextStyle}"/>
-            </Border>
+                </Border>
 
-            <!-- ============================================ -->
-            <!-- BÚSQUEDA DE PRODUCTOS                       -->
-            <!-- ============================================ -->
-            <Border Grid.Row="1"
+                <!-- ============================================ -->
+                <!-- BÚSQUEDA DE PRODUCTOS                       -->
+                <!-- ============================================ -->
+                <Border Grid.Row="1"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="15"
                     Margin="0,0,0,10"
                     CornerRadius="8">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*"/>
+                            <ColumnDefinition Width="Auto"/>
+                        </Grid.ColumnDefinitions>
 
-                    <!-- TextBox de búsqueda con resultados desplegables -->
-                    <Grid Grid.Column="0">
-                        <TextBox x:Name="SearchBox"
+                        <!-- TextBox de búsqueda con resultados desplegables -->
+                        <Grid Grid.Column="0">
+                            <TextBox x:Name="SearchBox"
                                  Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
                                  Padding="12,10"
                                  FontSize="{StaticResource FontSizeNormal}"
                                  BorderBrush="{StaticResource BorderBrush}"
                                  BorderThickness="1">
-                            <TextBox.Style>
-                                <Style TargetType="TextBox">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate TargetType="TextBox">
-                                                <Border Background="{TemplateBinding Background}"
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox">
+                                        <Setter Property="Template">
+                                            <Setter.Value>
+                                                <ControlTemplate TargetType="TextBox">
+                                                    <Border Background="{TemplateBinding Background}"
                                                         BorderBrush="{TemplateBinding BorderBrush}"
                                                         BorderThickness="{TemplateBinding BorderThickness}"
                                                         CornerRadius="4,0,0,4">
-                                                    <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"/>
-                                                </Border>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </TextBox.Style>
-                        </TextBox>
+                                                        <ScrollViewer x:Name="PART_ContentHost" Padding="{TemplateBinding Padding}"/>
+                                                    </Border>
+                                                </ControlTemplate>
+                                            </Setter.Value>
+                                        </Setter>
+                                    </Style>
+                                </TextBox.Style>
+                            </TextBox>
 
-                        <!-- Placeholder -->
-                        <TextBlock Text="Buscar por nombre o escanear código de barras..."
+                            <!-- Placeholder -->
+                            <TextBlock Text="Buscar por nombre o escanear código de barras..."
                                    IsHitTestVisible="False"
                                    Margin="14,0,0,0"
                                    VerticalAlignment="Center">
-                            <TextBlock.Style>
-                                <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextStyle}">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding SearchText}" Value="">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                        <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                                <TextBlock.Style>
+                                    <Style TargetType="TextBlock" BasedOn="{StaticResource CaptionTextStyle}">
+                                        <Setter Property="Visibility" Value="Collapsed"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding SearchText}" Value="">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding SearchText}" Value="{x:Null}">
+                                                <Setter Property="Visibility" Value="Visible"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
 
-                        <!-- Popup de resultados -->
-                        <Popup IsOpen="{Binding ShowSearchResults}"
+                            <!-- Popup de resultados -->
+                            <Popup IsOpen="{Binding ShowSearchResults}"
                                PlacementTarget="{Binding ElementName=SearchBox}"
                                Placement="Bottom"
                                StaysOpen="False"
                                Width="{Binding ActualWidth, ElementName=SearchBox}">
-                            <Border Background="{StaticResource SurfaceBrush}"
+                                <Border Background="{StaticResource SurfaceBrush}"
                                     BorderBrush="{StaticResource BorderBrush}"
                                     BorderThickness="1"
                                     MaxHeight="250">
-                                <ListView ItemsSource="{Binding SearchResults}"
+                                    <ListView ItemsSource="{Binding SearchResults}"
                                           BorderThickness="0"
                                           Background="Transparent">
-                                    <ListView.ItemTemplate>
-                                        <DataTemplate>
-                                            <Button Command="{Binding DataContext.AddProductCommand,
+                                        <ListView.ItemTemplate>
+                                            <DataTemplate>
+                                                <Button Command="{Binding DataContext.AddProductCommand,
                                                         RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"
                                                     HorizontalAlignment="Stretch"
@@ -157,187 +159,187 @@
                                                     Background="Transparent"
                                                     BorderThickness="0"
                                                     Cursor="Hand">
-                                                <Grid>
-                                                    <Grid.ColumnDefinitions>
-                                                        <ColumnDefinition Width="*"/>
-                                                        <ColumnDefinition Width="Auto"/>
-                                                        <ColumnDefinition Width="80"/>
-                                                    </Grid.ColumnDefinitions>
-                                                    <TextBlock Grid.Column="0"
+                                                    <Grid>
+                                                        <Grid.ColumnDefinitions>
+                                                            <ColumnDefinition Width="*"/>
+                                                            <ColumnDefinition Width="Auto"/>
+                                                            <ColumnDefinition Width="80"/>
+                                                        </Grid.ColumnDefinitions>
+                                                        <TextBlock Grid.Column="0"
                                                                Text="{Binding BrandName}"
                                                                Style="{StaticResource BodyTextStyle}"
                                                                TextTrimming="CharacterEllipsis"/>
-                                                    <TextBlock Grid.Column="1"
+                                                        <TextBlock Grid.Column="1"
                                                                Text="{Binding Stock, StringFormat='Stock: {0}'}"
                                                                Style="{StaticResource CaptionTextStyle}"
                                                                Margin="10,0"/>
-                                                    <TextBlock Grid.Column="2"
+                                                        <TextBlock Grid.Column="2"
                                                                Text="{Binding SalePrice, StringFormat='{}{0:C}'}"
                                                                Style="{StaticResource BodyTextStyle}"
                                                                FontWeight="SemiBold"
                                                                HorizontalAlignment="Right"/>
-                                                </Grid>
-                                            </Button>
-                                        </DataTemplate>
-                                    </ListView.ItemTemplate>
-                                </ListView>
-                            </Border>
-                        </Popup>
-                    </Grid>
+                                                    </Grid>
+                                                </Button>
+                                            </DataTemplate>
+                                        </ListView.ItemTemplate>
+                                    </ListView>
+                                </Border>
+                            </Popup>
+                        </Grid>
 
-                    <!-- Botón limpiar búsqueda -->
-                    <Button Grid.Column="1"
+                        <!-- Botón limpiar búsqueda -->
+                        <Button Grid.Column="1"
                             Content="✕"
                             Command="{Binding ClearSearchCommand}"
                             Padding="12,10"
                             FontSize="{StaticResource FontSizeNormal}">
-                        <Button.Style>
-                            <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
-                                <Setter Property="Template">
-                                    <Setter.Value>
-                                        <ControlTemplate TargetType="Button">
-                                            <Border Background="{TemplateBinding Background}"
+                            <Button.Style>
+                                <Style TargetType="Button" BasedOn="{StaticResource PrimaryButton}">
+                                    <Setter Property="Template">
+                                        <Setter.Value>
+                                            <ControlTemplate TargetType="Button">
+                                                <Border Background="{TemplateBinding Background}"
                                                     CornerRadius="0,4,4,0"
                                                     Padding="{TemplateBinding Padding}">
-                                                <ContentPresenter HorizontalAlignment="Center"
+                                                    <ContentPresenter HorizontalAlignment="Center"
                                                                   VerticalAlignment="Center"/>
-                                            </Border>
-                                            <ControlTemplate.Triggers>
-                                                <Trigger Property="IsMouseOver" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource PrimaryDarkBrush}"/>
-                                                </Trigger>
-                                            </ControlTemplate.Triggers>
-                                        </ControlTemplate>
-                                    </Setter.Value>
-                                </Setter>
-                            </Style>
-                        </Button.Style>
-                    </Button>
-                </Grid>
-            </Border>
+                                                </Border>
+                                                <ControlTemplate.Triggers>
+                                                    <Trigger Property="IsMouseOver" Value="True">
+                                                        <Setter Property="Background" Value="{StaticResource PrimaryDarkBrush}"/>
+                                                    </Trigger>
+                                                </ControlTemplate.Triggers>
+                                            </ControlTemplate>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Style>
+                            </Button.Style>
+                        </Button>
+                    </Grid>
+                </Border>
 
-            <!-- ============================================ -->
-            <!-- TABLA DE LÍNEAS DE VENTA                    -->
-            <!-- ============================================ -->
-            <Border Grid.Row="2"
+                <!-- ============================================ -->
+                <!-- TABLA DE LÍNEAS DE VENTA                    -->
+                <!-- ============================================ -->
+                <Border Grid.Row="2"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="0"
                     CornerRadius="8">
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="Auto"/>
-                        <!-- Encabezado tabla -->
-                        <RowDefinition Height="*"/>
-                        <!-- Filas -->
-                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto"/>
+                            <!-- Encabezado tabla -->
+                            <RowDefinition Height="*"/>
+                            <!-- Filas -->
+                        </Grid.RowDefinitions>
 
-                    <!-- Encabezado de la tabla -->
-                    <Border Grid.Row="0"
+                        <!-- Encabezado de la tabla -->
+                        <Border Grid.Row="0"
                             Background="{StaticResource BackgroundBrush}"
                             Padding="15,10"
                             CornerRadius="8,8,0,0">
-                        <Grid>
-                            <Grid.ColumnDefinitions>
-                                <ColumnDefinition Width="*"/>
-                                <!-- Producto -->
-                                <ColumnDefinition Width="100"/>
-                                <!-- Precio unit. -->
-                                <ColumnDefinition Width="120"/>
-                                <!-- Cantidad -->
-                                <ColumnDefinition Width="100"/>
-                                <!-- Subtotal -->
-                                <ColumnDefinition Width="50"/>
-                                <!-- Eliminar -->
-                            </Grid.ColumnDefinitions>
-                            <TextBlock Grid.Column="0" Text="Producto"
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*"/>
+                                    <!-- Producto -->
+                                    <ColumnDefinition Width="100"/>
+                                    <!-- Precio unit. -->
+                                    <ColumnDefinition Width="120"/>
+                                    <!-- Cantidad -->
+                                    <ColumnDefinition Width="100"/>
+                                    <!-- Subtotal -->
+                                    <ColumnDefinition Width="50"/>
+                                    <!-- Eliminar -->
+                                </Grid.ColumnDefinitions>
+                                <TextBlock Grid.Column="0" Text="Producto"
                                        Style="{StaticResource CaptionTextStyle}"
                                        FontWeight="SemiBold"/>
-                            <TextBlock Grid.Column="1" Text="Precio"
+                                <TextBlock Grid.Column="1" Text="Precio"
                                        Style="{StaticResource CaptionTextStyle}"
                                        FontWeight="SemiBold"
                                        HorizontalAlignment="Right"/>
-                            <TextBlock Grid.Column="2" Text="Cantidad"
+                                <TextBlock Grid.Column="2" Text="Cantidad"
                                        Style="{StaticResource CaptionTextStyle}"
                                        FontWeight="SemiBold"
                                        HorizontalAlignment="Center"/>
-                            <TextBlock Grid.Column="3" Text="Valor"
+                                <TextBlock Grid.Column="3" Text="Valor"
                                        Style="{StaticResource CaptionTextStyle}"
                                        FontWeight="SemiBold"
                                        HorizontalAlignment="Right"/>
-                        </Grid>
-                    </Border>
+                            </Grid>
+                        </Border>
 
-                    <!-- Filas de productos -->
-                    <ScrollViewer Grid.Row="1"
+                        <!-- Filas de productos -->
+                        <ScrollViewer Grid.Row="1"
                                   VerticalScrollBarVisibility="Auto">
-                        <ItemsControl ItemsSource="{Binding SaleLines}">
-                            <ItemsControl.ItemTemplate>
-                                <DataTemplate>
-                                    <Border BorderBrush="{StaticResource DividerBrush}"
+                            <ItemsControl ItemsSource="{Binding SaleLines}">
+                                <ItemsControl.ItemTemplate>
+                                    <DataTemplate>
+                                        <Border BorderBrush="{StaticResource DividerBrush}"
                                             BorderThickness="0,0,0,1"
                                             Padding="15,12">
-                                        <Grid>
-                                            <Grid.ColumnDefinitions>
-                                                <ColumnDefinition Width="*"/>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="120"/>
-                                                <ColumnDefinition Width="100"/>
-                                                <ColumnDefinition Width="50"/>
-                                            </Grid.ColumnDefinitions>
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="120"/>
+                                                    <ColumnDefinition Width="100"/>
+                                                    <ColumnDefinition Width="50"/>
+                                                </Grid.ColumnDefinitions>
 
-                                            <!-- Nombre del producto -->
-                                            <StackPanel Grid.Column="0" VerticalAlignment="Center">
-                                                <TextBlock Text="{Binding ProductName}"
+                                                <!-- Nombre del producto -->
+                                                <StackPanel Grid.Column="0" VerticalAlignment="Center">
+                                                    <TextBlock Text="{Binding ProductName}"
                                                            Style="{StaticResource BodyTextStyle}"
                                                            TextTrimming="CharacterEllipsis"/>
-                                                <TextBlock Text="{Binding BarCode, StringFormat='Cód: {0}'}"
+                                                    <TextBlock Text="{Binding BarCode, StringFormat='Cód: {0}'}"
                                                            Style="{StaticResource CaptionTextStyle}"/>
-                                            </StackPanel>
+                                                </StackPanel>
 
-                                            <!-- Precio unitario -->
-                                            <TextBlock Grid.Column="1"
+                                                <!-- Precio unitario -->
+                                                <TextBlock Grid.Column="1"
                                                        Text="{Binding UnitPrice, StringFormat=C2}"
                                                        Style="{StaticResource BodyTextStyle}"
                                                        HorizontalAlignment="Right"
                                                        VerticalAlignment="Center"/>
 
-                                            <!-- Controles de cantidad -->
-                                            <StackPanel Grid.Column="2"
+                                                <!-- Controles de cantidad -->
+                                                <StackPanel Grid.Column="2"
                                                         Orientation="Horizontal"
                                                         HorizontalAlignment="Center"
                                                         VerticalAlignment="Center">
-                                                <Button Content="−"
+                                                    <Button Content="−"
                                                         Style="{StaticResource IconButton}"
                                                         Width="30" Height="30"
                                                         FontSize="{StaticResource FontSizeMedium}"
                                                         Command="{Binding DataContext.DecrementAmountCommand,
                                                             RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                         CommandParameter="{Binding}"/>
-                                                <TextBlock Text="{Binding Amount}"
+                                                    <TextBlock Text="{Binding Amount}"
                                                            Style="{StaticResource BodyTextStyle}"
                                                            FontWeight="SemiBold"
                                                            Width="35"
                                                            TextAlignment="Center"
                                                            VerticalAlignment="Center"/>
-                                                <Button Content="+"
+                                                    <Button Content="+"
                                                         Style="{StaticResource IconButton}"
                                                         Width="30" Height="30"
                                                         FontSize="{StaticResource FontSizeMedium}"
                                                         Command="{Binding DataContext.IncrementAmountCommand,
                                                             RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                         CommandParameter="{Binding}"/>
-                                            </StackPanel>
+                                                </StackPanel>
 
-                                            <!-- Subtotal -->
-                                            <TextBlock Grid.Column="3"
+                                                <!-- Subtotal -->
+                                                <TextBlock Grid.Column="3"
                                                        Text="{Binding SubTotal, StringFormat=C2}"
                                                        Style="{StaticResource BodyTextStyle}"
                                                        FontWeight="SemiBold"
                                                        HorizontalAlignment="Right"
                                                        VerticalAlignment="Center"/>
 
-                                            <!-- Botón eliminar -->
-                                            <Button Grid.Column="4"
+                                                <!-- Botón eliminar -->
+                                                <Button Grid.Column="4"
                                                     Content="🗑"
                                                     Style="{StaticResource IconButton}"
                                                     Width="30" Height="30"
@@ -346,152 +348,152 @@
                                                     Command="{Binding DataContext.RemoveLineCommand,
                                                         RelativeSource={RelativeSource AncestorType=UserControl}}"
                                                     CommandParameter="{Binding}"/>
-                                        </Grid>
-                                    </Border>
-                                </DataTemplate>
-                            </ItemsControl.ItemTemplate>
-                        </ItemsControl>
-                    </ScrollViewer>
+                                            </Grid>
+                                        </Border>
+                                    </DataTemplate>
+                                </ItemsControl.ItemTemplate>
+                            </ItemsControl>
+                        </ScrollViewer>
 
-                    <!-- Mensaje vacío -->
-                    <Border Grid.Row="1"
+                        <!-- Mensaje vacío -->
+                        <Border Grid.Row="1"
                             Padding="40"
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center">
-                        <Border.Style>
-                            <Style TargetType="Border">
-                                <Setter Property="Visibility" Value="Collapsed"/>
-                                <Style.Triggers>
-                                    <DataTrigger Binding="{Binding HasLines}" Value="False">
-                                        <Setter Property="Visibility" Value="Visible"/>
-                                    </DataTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </Border.Style>
-                        <StackPanel HorizontalAlignment="Center">
-                            <TextBlock Text="🛒"
+                            <Border.Style>
+                                <Style TargetType="Border">
+                                    <Setter Property="Visibility" Value="Collapsed"/>
+                                    <Style.Triggers>
+                                        <DataTrigger Binding="{Binding HasLines}" Value="False">
+                                            <Setter Property="Visibility" Value="Visible"/>
+                                        </DataTrigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Border.Style>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock Text="🛒"
                                        FontSize="48"
                                        HorizontalAlignment="Center"
                                        Margin="0,0,0,15"/>
-                            <TextBlock Text="No hay productos en la venta"
+                                <TextBlock Text="No hay productos en la venta"
                                        Style="{StaticResource BodyTextStyle}"
                                        Foreground="{StaticResource TextSecondaryBrush}"
                                        HorizontalAlignment="Center"/>
-                            <TextBlock Text="Busca o escanea un producto para comenzar"
+                                <TextBlock Text="Busca o escanea un producto para comenzar"
                                        Style="{StaticResource CaptionTextStyle}"
                                        HorizontalAlignment="Center"
                                        Margin="0,5,0,0"/>
-                        </StackPanel>
-                    </Border>
-                </Grid>
-            </Border>
-        </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </Border>
+            </Grid>
 
-        <!-- ============================================ -->
-        <!-- PANEL DERECHO: TOTALES Y COBRO              -->
-        <!-- ============================================ -->
-        <Grid Grid.Column="2">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Resumen totales -->
-                <RowDefinition Height="Auto"/>
-                <!-- IVA desglose -->
-                <RowDefinition Height="Auto"/>
-                <!-- Cobro -->
-                <RowDefinition Height="*"/>
-                <!-- Espaciador -->
-                <RowDefinition Height="Auto"/>
-                <!-- Botones acción -->
-            </Grid.RowDefinitions>
+            <!-- ============================================ -->
+            <!-- PANEL DERECHO: TOTALES Y COBRO              -->
+            <!-- ============================================ -->
+            <Grid Grid.Column="2">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Resumen totales -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- IVA desglose -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Cobro -->
+                    <RowDefinition Height="*"/>
+                    <!-- Espaciador -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Botones acción -->
+                </Grid.RowDefinitions>
 
-            <!-- Resumen de totales -->
-            <Border Grid.Row="0"
+                <!-- Resumen de totales -->
+                <Border Grid.Row="0"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="20"
                     Margin="0,0,0,10"
                     CornerRadius="8">
-                <StackPanel>
-                    <TextBlock Text="Resumen"
+                    <StackPanel>
+                        <TextBlock Text="Resumen"
                                Style="{StaticResource SubtitleTextStyle}"
                                Margin="0,0,0,15"/>
 
-                    <!-- Items count -->
-                    <Grid Margin="0,0,0,8">
-                        <TextBlock Text="Productos:"
+                        <!-- Items count -->
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="Productos:"
                                    Style="{StaticResource BodyTextStyle}"
                                    Foreground="{StaticResource TextSecondaryBrush}"/>
-                        <TextBlock Text="{Binding TotalItems}"
+                            <TextBlock Text="{Binding TotalItems}"
                                    Style="{StaticResource BodyTextStyle}"
                                    HorizontalAlignment="Right"/>
-                    </Grid>
+                        </Grid>
 
-                    <!-- Base -->
-                    <Grid Margin="0,0,0,8">
-                        <TextBlock Text="Subtotal (sin IVA):"
+                        <!-- Base -->
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="Subtotal (sin IVA):"
                                    Style="{StaticResource BodyTextStyle}"
                                    Foreground="{StaticResource TextSecondaryBrush}"/>
-                        <TextBlock Text="{Binding SubTotal, StringFormat=C2}"
+                            <TextBlock Text="{Binding SubTotal, StringFormat=C2}"
                                    Style="{StaticResource BodyTextStyle}"
                                    HorizontalAlignment="Right"/>
-                    </Grid>
+                        </Grid>
 
-                    <!-- IVA -->
-                    <Grid Margin="0,0,0,8">
-                        <TextBlock Text="IVA:"
+                        <!-- IVA -->
+                        <Grid Margin="0,0,0,8">
+                            <TextBlock Text="IVA:"
                                    Style="{StaticResource BodyTextStyle}"
                                    Foreground="{StaticResource TextSecondaryBrush}"/>
-                        <TextBlock Text="{Binding TotalIVA, StringFormat=C2}"
+                            <TextBlock Text="{Binding TotalIVA, StringFormat=C2}"
                                    Style="{StaticResource BodyTextStyle}"
                                    HorizontalAlignment="Right"/>
-                    </Grid>
+                        </Grid>
 
-                    <Separator Background="{StaticResource DividerBrush}" Margin="0,8"/>
+                        <Separator Background="{StaticResource DividerBrush}" Margin="0,8"/>
 
-                    <!-- Total -->
-                    <Grid>
-                        <TextBlock Text="TOTAL:"
+                        <!-- Total -->
+                        <Grid>
+                            <TextBlock Text="TOTAL:"
                                    Style="{StaticResource HeadingTextStyle}"
                                    VerticalAlignment="Center"/>
-                        <TextBlock Text="{Binding SubTotal, StringFormat=C2}"
+                            <TextBlock Text="{Binding SubTotal, StringFormat=C2}"
                                    FontSize="{StaticResource FontSizeLarge}"
                                    FontWeight="Bold"
                                    Foreground="{StaticResource PrimaryBrush}"
                                    HorizontalAlignment="Right"
                                    VerticalAlignment="Center"/>
-                    </Grid>
-                </StackPanel>
-            </Border>
+                        </Grid>
+                    </StackPanel>
+                </Border>
 
-            <!-- Panel de cobro -->
-            <Border Grid.Row="2"
+                <!-- Panel de cobro -->
+                <Border Grid.Row="2"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="10"
                     Margin="0,0,0,10"
                     CornerRadius="8">
-                <StackPanel>
-                    <TextBlock Text="Cobro"
+                    <StackPanel>
+                        <TextBlock Text="Cobro"
                                Style="{StaticResource SubtitleTextStyle}"
                                Margin="0,0,0,15"/>
-                    <TextBlock Text="Método de pago"
+                        <TextBlock Text="Método de pago"
                                Style="{StaticResource BodyTextStyle}"
                                Margin="0,0,0,8"/>
-                    <UniformGrid Rows="1" Margin="0,0,0,15">
-                        <RadioButton Content="💵 Efectivo"
+                        <UniformGrid Rows="1" Margin="0,0,0,15">
+                            <RadioButton Content="💵 Efectivo"
                                      GroupName="PaymentMethod"
                                      IsChecked="{Binding IsPaymentCash}"
                                      Style="{StaticResource PaymentMethodToggle}"
                                      Margin="0,0,4,0"/>
-                        <RadioButton Content="🏦 Transf."
+                            <RadioButton Content="🏦 Transf."
                                      GroupName="PaymentMethod"
                                      IsChecked="{Binding IsPaymentTransfer}"
                                      Style="{StaticResource PaymentMethodToggle}"
                                      Margin="4,0,0,0"/>
-                    </UniformGrid>
-                    <!-- Dinero recibido -->
-                    <TextBlock Text="Dinero recibido"
+                        </UniformGrid>
+                        <!-- Dinero recibido -->
+                        <TextBlock Text="Dinero recibido"
                                Style="{StaticResource BodyTextStyle}"
                                Margin="0,0,0,5"/>
-                    <TextBox Text="{Binding CashReceived, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
+                        <TextBox Text="{Binding CashReceived, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}" 
                              Padding="12,10"
                              FontSize="{StaticResource FontSizeMedium}"
                              FontWeight="SemiBold"
@@ -500,28 +502,28 @@
                              BorderBrush="{StaticResource BorderBrush}"
                              BorderThickness="1"/>
 
-                    <!-- Cambio -->
-                    <Border Background="{StaticResource FocusBrush}"
+                        <!-- Cambio -->
+                        <Border Background="{StaticResource FocusBrush}"
                             CornerRadius="4"
                             Padding="12,10">
-                        <Grid>
-                            <TextBlock Text="Cambio:"
+                            <Grid>
+                                <TextBlock Text="Cambio:"
                                        Style="{StaticResource HeadingTextStyle}"
                                        VerticalAlignment="Center"/>
-                            <TextBlock Text="{Binding Change, StringFormat=C2}"
+                                <TextBlock Text="{Binding Change, StringFormat=C2}"
                                        FontSize="{StaticResource FontSizeLarge}"
                                        FontWeight="Bold"
                                        Foreground="{StaticResource PrimaryBrush}"
                                        HorizontalAlignment="Right"
                                        VerticalAlignment="Center"/>
-                        </Grid>
-                    </Border>
-                </StackPanel>
-            </Border>
+                            </Grid>
+                        </Border>
+                    </StackPanel>
+                </Border>
 
-            <!-- Botones de acción -->
-            <StackPanel Grid.Row="4">
-                <Button Content="✅ Procesar Venta"
+                <!-- Botones de acción -->
+                <StackPanel Grid.Row="4">
+                    <Button Content="✅ Procesar Venta"
                         Style="{StaticResource PrimaryButton}"
                         HorizontalAlignment="Stretch"
                         Padding="16,14"
@@ -529,12 +531,15 @@
                         FontSize="{StaticResource FontSizeMedium}"
                         Command="{Binding ProcessSaleCommand}"/>
 
-                <Button Content="❌ Cancelar Venta"
+                    <Button Content="❌ Cancelar Venta"
                         Style="{StaticResource DangerButton}"
                         HorizontalAlignment="Stretch"
                         Padding="16,10"
                         Command="{Binding CancelSaleCommand}"/>
-            </StackPanel>
+                </StackPanel>
+            </Grid>
         </Grid>
-    </Grid>
+        <controls:BusyOverlay IsBusy="{Binding IsBusy}"
+                               BusyMessage="{Binding BusyMessage}"/>
+    </Grid> 
 </UserControl>

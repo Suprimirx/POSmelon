@@ -23,7 +23,6 @@ public partial class SaleViewModel : BaseViewModel
 
     [ObservableProperty]
     [NotifyPropertyChangedFor(nameof(Change))]
-    [NotifyPropertyChangedFor(nameof(Change))]
     [NotifyCanExecuteChangedFor(nameof(ProcessSaleCommand))]
     private decimal _cashReceived;
 

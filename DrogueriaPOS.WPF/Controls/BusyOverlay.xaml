@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="DrogueriaPOS.WPF.Controls.BusyOverlay"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="Root"
+             IsHitTestVisible="{Binding IsBusy, ElementName=Root}">
+    <Border Background="#B3000000">
+        <Border.Style>
+            <Style TargetType="Border">
+                <Setter Property="Visibility" Value="Collapsed"/>
+                <Style.Triggers>
+                    <DataTrigger Binding="{Binding IsBusy, ElementName=Root}" Value="True">
+                        <Setter Property="Visibility" Value="Visible"/>
+                    </DataTrigger>
+                </Style.Triggers>
+            </Style>
+        </Border.Style>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <ProgressBar IsIndeterminate="True"
+                         Width="140"
+                         Height="6"
+                         Foreground="{StaticResource PrimaryBrush}"/>
+            <TextBlock Text="{Binding BusyMessage, ElementName=Root}"
+                       Foreground="White"
+                       FontSize="14"
+                       FontWeight="SemiBold"
+                       Margin="0,15,0,0"
+                       HorizontalAlignment="Center"/>
+        </StackPanel>
+    </Border>
+</UserControl>

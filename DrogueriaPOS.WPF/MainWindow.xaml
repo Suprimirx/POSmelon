@@ -4,11 +4,9 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Title="{Binding Title}" 
-        Height="768" 
-        Width="1366"
-        MinHeight="600"
-        MinWidth="1000"
+        Title="{Binding Title}" Height="720" Width="1280"
+        MinHeight="480"
+        MinWidth="640"
         WindowStyle="None"
         AllowsTransparency="True"
         Background="Transparent"
@@ -101,49 +99,45 @@
         </Style>
     </Window.Resources>
 
-    <Border Background="{StaticResource SurfaceBrush}"
-            BorderBrush="{StaticResource BorderBrush}"
-            BorderThickness="1">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <!-- Barra de título -->
+            <RowDefinition Height="*"/>
+            <!-- Contenido -->
+        </Grid.RowDefinitions>
 
-        <Grid>
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <!-- Barra de título -->
-                <RowDefinition Height="*"/>
-                <!-- Contenido -->
-            </Grid.RowDefinitions>
-
-            <!-- ============================================ -->
-            <!-- BARRA DE TÍTULO PERSONALIZADA                -->
-            <!-- ============================================ -->
-            <Border Grid.Row="0" 
+        <!-- ============================================ -->
+        <!-- BARRA DE TÍTULO PERSONALIZADA                -->
+        <!-- ============================================ -->
+        <Border Grid.Row="0" 
                     Background="{StaticResource PrimaryBrush}"
                     MouseLeftButtonDown="TitleBar_MouseLeftButtonDown">
 
-                <Grid Height="40">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto"/>
-                        <ColumnDefinition Width="*"/>
-                        <ColumnDefinition Width="Auto"/>
-                    </Grid.ColumnDefinitions>
+            <Grid Height="40">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
 
-                    <!-- Logo y Título -->
-                    <StackPanel Grid.Column="0" 
+                <!-- Logo y Título -->
+                <StackPanel Grid.Column="0" 
                                Orientation="Horizontal"
                                Margin="15,0">
-                        <TextBlock Text="💊" 
+                    <TextBlock Text="💊" 
                                   FontSize="20"
                                   VerticalAlignment="Center"
                                   Margin="0,0,10,0"/>
-                        <TextBlock Text="{Binding Title}"
+                    <TextBlock Text="{Binding Title}"
                                   Foreground="{StaticResource TextOnPrimaryBrush}"
                                   FontSize="{StaticResource FontSizeNormal}"
                                   FontWeight="SemiBold"
                                   VerticalAlignment="Center"/>
-                    </StackPanel>
+                </StackPanel>
 
-                    <!-- Módulo actual -->
-                    <TextBlock Grid.Column="1"
+                <!-- Módulo actual -->
+                <TextBlock Grid.Column="1"
                               Text="{Binding CurrentModule, StringFormat='Módulo: {0}'}"
                               Foreground="{StaticResource TextOnPrimaryBrush}"
                               FontSize="{StaticResource FontSizeSmall}"
@@ -151,379 +145,378 @@
                               HorizontalAlignment="Center"
                               Opacity="0.9"/>
 
-                    <!-- Controles de ventana -->
-                    <StackPanel Grid.Column="2" 
+                <!-- Controles de ventana -->
+                <StackPanel Grid.Column="2" 
                                Orientation="Horizontal">
 
-                        <!-- Minimizar -->
-                        <Button Style="{StaticResource TitleBarButtonStyle}"
+                    <!-- Minimizar -->
+                    <Button Style="{StaticResource TitleBarButtonStyle}"
                                 Command="{Binding MinimizeWindowCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <TextBlock Text="─" 
+                        <TextBlock Text="─" 
                                       FontSize="16" 
                                       Foreground="{StaticResource TextOnPrimaryBrush}"/>
-                        </Button>
+                    </Button>
 
-                        <!-- Maximizar/Restaurar -->
-                        <Button Style="{StaticResource TitleBarButtonStyle}"
+                    <!-- Maximizar/Restaurar -->
+                    <Button Style="{StaticResource TitleBarButtonStyle}"
                                 Command="{Binding MaximizeWindowCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <TextBlock Text="□" 
+                        <TextBlock Text="□" 
                                       FontSize="16" 
                                       Foreground="{StaticResource TextOnPrimaryBrush}"/>
-                        </Button>
+                    </Button>
 
-                        <!-- Cerrar -->
-                        <Button Style="{StaticResource CloseButtonStyle}"
+                    <!-- Cerrar -->
+                    <Button Style="{StaticResource CloseButtonStyle}"
                                 Command="{Binding CloseWindowCommand}"
                                 CommandParameter="{Binding RelativeSource={RelativeSource AncestorType=Window}}">
-                            <TextBlock Text="✕" 
+                        <TextBlock Text="✕" 
                                       FontSize="16" 
                                       Foreground="{StaticResource TextOnPrimaryBrush}"/>
-                        </Button>
-                    </StackPanel>
-                </Grid>
-            </Border>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+
+        <!-- ============================================ -->
+        <!-- CONTENIDO PRINCIPAL                          -->
+        <!-- ============================================ -->
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <!-- Menú lateral -->
+                <ColumnDefinition Width="*"/>
+                <!-- Área de contenido -->
+            </Grid.ColumnDefinitions>
 
             <!-- ============================================ -->
-            <!-- CONTENIDO PRINCIPAL                          -->
+            <!-- MENÚ LATERAL                                 -->
             <!-- ============================================ -->
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="Auto"/>
-                    <!-- Menú lateral -->
-                    <ColumnDefinition Width="*"/>
-                    <!-- Área de contenido -->
-                </Grid.ColumnDefinitions>
-
-                <!-- ============================================ -->
-                <!-- MENÚ LATERAL                                 -->
-                <!-- ============================================ -->
-                <Border Grid.Column="0"
+            <Border Grid.Column="0"
                         Background="{StaticResource BackgroundBrush}"
                         BorderBrush="{StaticResource BorderBrush}"
                         BorderThickness="0,0,1,0">
-                    <Border.Style>
-                        <Style TargetType="Border">
-                            <Setter Property="Width" Value="172"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
-                                    <Setter Property="Width" Value="54"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </Border.Style>
+                <Border.Style>
+                    <Style TargetType="Border">
+                        <Setter Property="Width" Value="172"/>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
+                                <Setter Property="Width" Value="54"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </Border.Style>
 
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <!-- Usuario -->
-                            <RowDefinition Height="*"/>
-                            <!-- Menú -->
-                            <RowDefinition Height="Auto"/>
-                            <!-- Footer -->
-                        </Grid.RowDefinitions>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <!-- Usuario -->
+                        <RowDefinition Height="*"/>
+                        <!-- Menú -->
+                        <RowDefinition Height="Auto"/>
+                        <!-- Footer -->
+                    </Grid.RowDefinitions>
 
-                        <!-- Información de Usuario -->
-                        <Border Grid.Row="0"
+                    <!-- Información de Usuario -->
+                    <Border Grid.Row="0"
                                 Background="{StaticResource SurfaceBrush}"
                                 BorderBrush="{StaticResource BorderBrush}"
                                 BorderThickness="0,0,0,1">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Padding" Value="15"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
-                                            <Setter Property="Padding" Value="5,15"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Padding" Value="15"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
+                                        <Setter Property="Padding" Value="5,15"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
 
-                            <StackPanel>
-                                <!-- Avatar -->
-                                <Border HorizontalAlignment="Center"
+                        <StackPanel>
+                            <!-- Avatar -->
+                            <Border HorizontalAlignment="Center"
                                         CornerRadius="30"
                                         Margin="0,0,0,8">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Width" Value="60"/>
-                                            <Setter Property="Height" Value="60"/>
-                                            <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}"/>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Width" Value="60"/>
+                                        <Setter Property="Height" Value="60"/>
+                                        <Setter Property="Background" Value="{StaticResource PrimaryLightBrush}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
+                                                <Setter Property="Width" Value="34"/>
+                                                <Setter Property="Height" Value="34"/>
+                                                <Setter Property="Background" Value="Transparent"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock HorizontalAlignment="Center"
+                                               VerticalAlignment="Center">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="👤"/>
+                                            <Setter Property="FontSize" Value="30"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
-                                                    <Setter Property="Width" Value="34"/>
-                                                    <Setter Property="Height" Value="34"/>
-                                                    <Setter Property="Background" Value="Transparent"/>
+                                                    <Setter Property="FontSize" Value="22"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </Border.Style>
-                                    <TextBlock HorizontalAlignment="Center"
-                                               VerticalAlignment="Center">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="👤"/>
-                                                <Setter Property="FontSize" Value="30"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsMenuExpanded}" Value="False">
-                                                        <Setter Property="FontSize" Value="22"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                </Border>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
 
-                                <!-- Punto indicador de estado de caja (solo visible al contraer) -->
-                                <Ellipse Width="10" 
+                            <!-- Punto indicador de estado de caja (solo visible al contraer) -->
+                            <Ellipse Width="10" 
                                          Height="10"
                                          HorizontalAlignment="Center"
                                          Margin="0,0,0,8">
-                                    <Ellipse.Style>
-                                        <Style TargetType="Ellipse">
-                                            <Setter Property="Fill" Value="{StaticResource ErrorBrush}"/>
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
-                                                    <Setter Property="Fill" Value="{StaticResource SuccessBrush}"/>
-                                                </DataTrigger>
-                                                <DataTrigger Binding="{Binding IsMenuExpanded}" Value="True">
-                                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Ellipse.Style>
-                                </Ellipse>
+                                <Ellipse.Style>
+                                    <Style TargetType="Ellipse">
+                                        <Setter Property="Fill" Value="{StaticResource ErrorBrush}"/>
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
+                                                <Setter Property="Fill" Value="{StaticResource SuccessBrush}"/>
+                                            </DataTrigger>
+                                            <DataTrigger Binding="{Binding IsMenuExpanded}" Value="True">
+                                                <Setter Property="Visibility" Value="Collapsed"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Ellipse.Style>
+                            </Ellipse>
 
-                                <!-- Nombre de usuario -->
-                                <TextBlock Text="{Binding CashierName}"
+                            <!-- Nombre de usuario -->
+                            <TextBlock Text="{Binding CashierName}"
                                            Style="{StaticResource HeadingTextStyle}"
                                            TextAlignment="Center"
                                            Margin="0,0,0,5"
                                            Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
 
-                                <Border CornerRadius="10"
+                            <Border CornerRadius="10"
                                         Padding="8,3"
                                         HorizontalAlignment="Center"
                                         Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}">
-                                    <Border.Style>
-                                        <Style TargetType="Border">
-                                            <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                <Border.Style>
+                                    <Style TargetType="Border">
+                                        <Setter Property="Background" Value="{StaticResource ErrorBrush}"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
+                                                <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Border.Style>
+                                <TextBlock Foreground="White"
+                                               FontSize="{StaticResource FontSizeSmall}"
+                                               FontWeight="SemiBold">
+                                    <TextBlock.Style>
+                                        <Style TargetType="TextBlock">
+                                            <Setter Property="Text" Value="● Caja cerrada"/>
                                             <Style.Triggers>
                                                 <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
-                                                    <Setter Property="Background" Value="{StaticResource SuccessBrush}"/>
+                                                    <Setter Property="Text" Value="● Caja abierta"/>
                                                 </DataTrigger>
                                             </Style.Triggers>
                                         </Style>
-                                    </Border.Style>
-                                    <TextBlock Foreground="White"
-                                               FontSize="{StaticResource FontSizeSmall}"
-                                               FontWeight="SemiBold">
-                                        <TextBlock.Style>
-                                            <Style TargetType="TextBlock">
-                                                <Setter Property="Text" Value="● Caja cerrada"/>
-                                                <Style.Triggers>
-                                                    <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
-                                                        <Setter Property="Text" Value="● Caja abierta"/>
-                                                    </DataTrigger>
-                                                </Style.Triggers>
-                                            </Style>
-                                        </TextBlock.Style>
-                                    </TextBlock>
-                                </Border>
-                            </StackPanel>
-                        </Border>
+                                    </TextBlock.Style>
+                                </TextBlock>
+                            </Border>
+                        </StackPanel>
+                    </Border>
 
-                        <!-- Opciones de Menú -->
-                        <ScrollViewer Grid.Row="1"
+                    <!-- Opciones de Menú -->
+                    <ScrollViewer Grid.Row="1"
                                      VerticalScrollBarVisibility="Auto"
                                      Margin="0,10,0,0">
 
-                            <StackPanel>
+                        <StackPanel>
 
-                                <TextBlock Text="VENTAS"
+                            <TextBlock Text="VENTAS"
                                            Style="{StaticResource CaptionTextStyle}"
                                            Margin="15,10,15,5"
                                            FontWeight="SemiBold"
                                            Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
 
-                                <Button Style="{StaticResource MenuButtonStyle}"
+                            <Button Style="{StaticResource MenuButtonStyle}"
                                         Command="{Binding NavigateToSaleCommand}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="🛒" FontSize="18" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Nueva Venta" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
-                                    </StackPanel>
-                                </Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🛒" FontSize="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Nueva Venta" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Button>
 
-                                <Separator Margin="10,10" Background="{StaticResource DividerBrush}"/>
+                            <Separator Margin="10,10" Background="{StaticResource DividerBrush}"/>
 
-                                <TextBlock Text="CAJA"
+                            <TextBlock Text="CAJA"
                                            Style="{StaticResource CaptionTextStyle}"
                                            Margin="15,0,15,5"
                                            FontWeight="SemiBold"
                                            Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
 
-                                <Button Command="{Binding NavigateToSaleCommand}">
-                                    <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
-                                            <Setter Property="IsEnabled" Value="False"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsSessionOpen}" Value="False">
-                                                    <Setter Property="IsEnabled" Value="True"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="🔓" FontSize="18" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Abrir Caja" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
-                                    </StackPanel>
-                                </Button>
+                            <Button Command="{Binding NavigateToSaleCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSessionOpen}" Value="False">
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🔓" FontSize="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Abrir Caja" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Button>
 
-                                <Button Command="{Binding NavigateToSessionCommand}">
-                                    <Button.Style>
-                                        <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
-                                            <Setter Property="IsEnabled" Value="False"/>
-                                            <Style.Triggers>
-                                                <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
-                                                    <Setter Property="IsEnabled" Value="True"/>
-                                                </DataTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </Button.Style>
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="🔒" FontSize="18" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Cerrar Caja" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
-                                    </StackPanel>
-                                </Button>
+                            <Button Command="{Binding NavigateToSessionCommand}">
+                                <Button.Style>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MenuButtonStyle}">
+                                        <Setter Property="IsEnabled" Value="False"/>
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding IsSessionOpen}" Value="True">
+                                                <Setter Property="IsEnabled" Value="True"/>
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </Button.Style>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="🔒" FontSize="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Cerrar Caja" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Button>
 
-                                <Separator Margin="10,10" Background="{StaticResource DividerBrush}"/>
+                            <Separator Margin="10,10" Background="{StaticResource DividerBrush}"/>
 
-                                <TextBlock Text="INVENTARIO"
+                            <TextBlock Text="INVENTARIO"
                                            Style="{StaticResource CaptionTextStyle}"
                                            Margin="15,0,15,5"
                                            FontWeight="SemiBold"
                                            Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
 
-                                <Button Style="{StaticResource MenuButtonStyle}"
+                            <Button Style="{StaticResource MenuButtonStyle}"
                                         Command="{Binding NavigateToProductsCommand}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="💊" FontSize="18" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Productos" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>
-                        </ScrollViewer>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="💊" FontSize="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Productos" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </ScrollViewer>
 
-                        <!-- Footer del Menú -->
-                        <Border Grid.Row="2"
+                    <!-- Footer del Menú -->
+                    <Border Grid.Row="2"
                                Background="{StaticResource SurfaceBrush}"
                                BorderBrush="{StaticResource BorderBrush}"
                                BorderThickness="0,1,0,0"
                                Padding="10">
 
-                            <StackPanel>
-                                <!-- Botón Toggle Menú -->
-                                <Button Style="{StaticResource MenuButtonStyle}"
+                        <StackPanel>
+                            <!-- Botón Toggle Menú -->
+                            <Button Style="{StaticResource MenuButtonStyle}"
                                        Command="{Binding ToggleMenuCommand}"
                                        Margin="0,0,0,5">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="☰" FontSize="18" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Contraer" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
-                                    </StackPanel>
-                                </Button>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="☰" FontSize="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Contraer" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Button>
 
-                                <Button Style="{StaticResource MenuButtonStyle}"
+                            <Button Style="{StaticResource MenuButtonStyle}"
                                         Command="{Binding NavigateToSettingsCommand}">
-                                    <StackPanel Orientation="Horizontal">
-                                        <TextBlock Text="⚙️" FontSize="18" Margin="0,0,10,0"/>
-                                        <TextBlock Text="Configuración" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
-                                    </StackPanel>
-                                </Button>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </Border>
+                                <StackPanel Orientation="Horizontal">
+                                    <TextBlock Text="⚙️" FontSize="18" Margin="0,0,10,0"/>
+                                    <TextBlock Text="Configuración" VerticalAlignment="Center" Visibility="{Binding IsMenuExpanded, Converter={StaticResource BoolToVis}}"/>
+                                </StackPanel>
+                            </Button>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
 
-                <!-- ============================================ -->
-                <!-- ÁREA DE CONTENIDO PRINCIPAL                  -->
-                <!-- ============================================ -->
-                <Border Grid.Column="1"
+            <!-- ============================================ -->
+            <!-- ÁREA DE CONTENIDO PRINCIPAL                  -->
+            <!-- ============================================ -->
+            <Border Grid.Column="1"
                         Background="{StaticResource BackgroundBrush}"
                         Padding="20">
 
-                    <Grid>
-                        <!-- Contenido dinámico -->
-                        <ContentControl Content="{Binding CurrentView}"
+                <Grid>
+                    <!-- Contenido dinámico -->
+                    <ContentControl Content="{Binding CurrentView}"
                                        HorizontalAlignment="Stretch"
                                        VerticalAlignment="Stretch"/>
 
-                        <!-- Mensaje cuando no hay vista cargada -->
-                        <Border Background="{StaticResource SurfaceBrush}"
+                    <!-- Mensaje cuando no hay vista cargada -->
+                    <Border Background="{StaticResource SurfaceBrush}"
                                CornerRadius="8"
                                Padding="40"
                                HorizontalAlignment="Center"
                                VerticalAlignment="Center">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding CurrentView}" Value="{x:Null}">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding CurrentView}" Value="{x:Null}">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
 
-                            <StackPanel HorizontalAlignment="Center">
-                                <TextBlock Text="👋" 
+                        <StackPanel HorizontalAlignment="Center">
+                            <TextBlock Text="👋" 
                                           FontSize="48"
                                           HorizontalAlignment="Center"
                                           Margin="0,0,0,20"/>
-                                <TextBlock Text="¡Bienvenido al Sistema POS!"
+                            <TextBlock Text="¡Bienvenido al Sistema POS!"
                                           Style="{StaticResource SubtitleTextStyle}"
                                           HorizontalAlignment="Center"
                                           Margin="0,0,0,10"/>
-                                <TextBlock Text="Selecciona una opción del menú para comenzar"
+                            <TextBlock Text="Selecciona una opción del menú para comenzar"
                                           Style="{StaticResource BodyTextStyle}"
                                           Foreground="{StaticResource TextSecondaryBrush}"
                                           HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
+                        </StackPanel>
+                    </Border>
 
-                        <!-- Indicador de carga -->
-                        <Border Background="#CC000000"
+                    <!-- Indicador de carga -->
+                    <Border Background="#CC000000"
                                CornerRadius="8">
-                            <Border.Style>
-                                <Style TargetType="Border">
-                                    <Setter Property="Visibility" Value="Collapsed"/>
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding IsBusy}" Value="True">
-                                            <Setter Property="Visibility" Value="Visible"/>
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Border.Style>
+                        <Border.Style>
+                            <Style TargetType="Border">
+                                <Setter Property="Visibility" Value="Collapsed"/>
+                                <Style.Triggers>
+                                    <DataTrigger Binding="{Binding IsBusy}" Value="True">
+                                        <Setter Property="Visibility" Value="Visible"/>
+                                    </DataTrigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Border.Style>
 
-                            <StackPanel HorizontalAlignment="Center" 
+                        <StackPanel HorizontalAlignment="Center" 
                                        VerticalAlignment="Center">
-                                <!-- Aquí puedes agregar un spinner animado -->
-                                <TextBlock Text="⏳" 
+                            <!-- Aquí puedes agregar un spinner animado -->
+                            <TextBlock Text="⏳" 
                                           FontSize="48"
                                           HorizontalAlignment="Center"
                                           Foreground="White"
                                           Margin="0,0,0,20"/>
-                                <TextBlock Text="{Binding BusyMessage}"
+                            <TextBlock Text="{Binding BusyMessage}"
                                           FontSize="{StaticResource FontSizeMedium}"
                                           FontWeight="Medium"
                                           Foreground="White"
                                           HorizontalAlignment="Center"/>
-                            </StackPanel>
-                        </Border>
-                    </Grid>
-                </Border>
-            </Grid>
+                        </StackPanel>
+                    </Border>
+                </Grid>
+            </Border>
         </Grid>
-    </Border>
+    </Grid>
 </Window>

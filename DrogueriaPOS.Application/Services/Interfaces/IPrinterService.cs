@@ -6,4 +6,3 @@ public interface IPrinterService
     Task PrintInvoiceAsync(Invoice invoice);
     Task PrintSessionSummaryAsync(CashRegisterSession session);
 }
-

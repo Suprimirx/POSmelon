@@ -113,7 +113,7 @@
                         <!-- Filas de facturas -->
                         <ScrollViewer Grid.Row="1"
                                       VerticalScrollBarVisibility="Auto"
-                                      Margin="0,85,0,0">
+                                      Margin="0,8,0,0">
                             <ItemsControl ItemsSource="{Binding Invoices}">
                                 <ItemsControl.ItemTemplate>
                                     <DataTemplate>

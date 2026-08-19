@@ -80,7 +80,7 @@ internal class InvoiceReceiptBuilder
             _e.PrintLine(sep),
 
             // ── Items ──────────────────────────────────────
-            _e.PrintLine(RightPair("Total artículos:", invoice.TotalItems.ToString())),
+            _e.PrintLine(RightPair("Total articulos:", invoice.TotalItems.ToString())),
             _e.PrintLine(sepDouble),
 
             // ── Pie ────────────────────────────────────────

@@ -33,4 +33,4 @@ jobs:
           dotnet tool install -g vpk
           vpk download github --repoUrl https://github.com/${{ github.repository }}
           vpk pack -u POSmelon -v ${{ steps.get-version.outputs.version }} -p publish -e POSmelon.exe --packTitle "POSmelon" --icon DrogueriaPOS.WPF\Assets\icon.ico
-          vpk upload github --repoUrl https://github.com/${{ github.repository }} --publish --releaseName "POSmelon ${{ steps.get-version.outputs.version }}" --tag ${{ github.ref_name }}
+          vpk upload github --repoUrl https://github.com/${{ github.repository }} --publish --releaseName "POSmelon ${{ steps.get-version.outputs.version }}" --tag ${{ github.ref_name }} --token ${{ secrets.GITHUB_TOKEN }}

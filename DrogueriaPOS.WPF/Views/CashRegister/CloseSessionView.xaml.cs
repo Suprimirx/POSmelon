@@ -1,7 +1,6 @@
 ﻿using DrogueriaPOS.WPF.ViewModels.CashRegister;
 using System.Windows.Controls;
 
-
 namespace DrogueriaPOS.WPF.Views.CashRegister;
 /// <summary>
 /// Interaction logic for CloseSessionView.xaml
@@ -15,4 +14,3 @@ public partial class CloseSessionView : UserControl
         Loaded += async (s, e) => await viewModel.InitializeAsync();
     }
 }
-

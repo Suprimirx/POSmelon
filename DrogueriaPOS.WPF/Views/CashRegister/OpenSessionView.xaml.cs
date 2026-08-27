@@ -1,7 +1,6 @@
 ﻿using DrogueriaPOS.WPF.ViewModels.CashRegister;
 using System.Windows.Controls;
 
-
 namespace DrogueriaPOS.WPF.Views.CashRegister;
 /// <summary>
 /// Interaction logic for OpenSessionView.xaml
@@ -15,4 +14,3 @@ public partial class OpenSessionView : UserControl
         Loaded += async (s, e) => await viewModel.InitializeAsync();
     }
 }
-

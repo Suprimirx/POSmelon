@@ -14,4 +14,3 @@ public partial class SessionSummaryView : UserControl
         DataContext = viewModel;
     }
 }
-

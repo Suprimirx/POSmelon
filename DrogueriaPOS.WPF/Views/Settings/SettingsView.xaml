@@ -3,265 +3,275 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:controls="clr-namespace:DrogueriaPOS.WPF.Controls"
              mc:Ignorable="d"
              d:DesignHeight="700" d:DesignWidth="900">
 
-    <ScrollViewer VerticalScrollBarVisibility="Auto">
-        <Grid Margin="20">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/> <!-- Encabezado -->
-                <RowDefinition Height="Auto"/> <!-- Datos de la tienda -->
-                <RowDefinition Height="Auto"/> <!-- Caja -->
-                <RowDefinition Height="Auto"/> <!-- Impresión -->
-                <RowDefinition Height="Auto"/> <!-- Botón guardar -->
-            </Grid.RowDefinitions>
+    <Grid>
+        <ScrollViewer VerticalScrollBarVisibility="Auto">
+            <Grid Margin="20">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <!-- Encabezado -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Datos de la tienda -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Caja -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Impresión -->
+                    <RowDefinition Height="Auto"/>
+                    <!-- Botón guardar -->
+                </Grid.RowDefinitions>
 
-            <!-- ============================================ -->
-            <!-- ENCABEZADO                                   -->
-            <!-- ============================================ -->
-            <Border Grid.Row="0"
+                <!-- ============================================ -->
+                <!-- ENCABEZADO                                   -->
+                <!-- ============================================ -->
+                <Border Grid.Row="0"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="20"
                     Margin="0,0,0,15"
                     CornerRadius="8">
-                <TextBlock Text="Configuración del Sistema"
+                    <TextBlock Text="Configuración del Sistema"
                            Style="{StaticResource TitleTextStyle}"/>
-            </Border>
+                </Border>
 
-            <!-- ============================================ -->
-            <!-- SECCIÓN: DATOS DE LA TIENDA                 -->
-            <!-- ============================================ -->
-            <Border Grid.Row="1"
+                <!-- ============================================ -->
+                <!-- SECCIÓN: DATOS DE LA TIENDA                 -->
+                <!-- ============================================ -->
+                <Border Grid.Row="1"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="20"
                     Margin="0,0,0,15"
                     CornerRadius="8">
-                <StackPanel>
-                    <TextBlock Text="🏪 Datos de la Tienda"
+                    <StackPanel>
+                        <TextBlock Text="🏪 Datos de la Tienda"
                                Style="{StaticResource SubtitleTextStyle}"
                                Margin="0,0,0,15"/>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <RowDefinition Height="Auto"/>
-                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
 
-                        <!-- Nombre de la tienda -->
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
-                            <TextBlock Text="Nombre de la tienda"
+                            <!-- Nombre de la tienda -->
+                            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                                <TextBlock Text="Nombre de la tienda"
                                        Style="{StaticResource BodyTextStyle}"
                                        Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding StoreName, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding StoreName, UpdateSourceTrigger=PropertyChanged}"
                                      Padding="10"
                                      FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- NIT -->
-                        <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,10">
-                            <TextBlock Text="NIT"
+                            <!-- NIT -->
+                            <StackPanel Grid.Row="0" Grid.Column="2" Margin="0,0,0,10">
+                                <TextBlock Text="NIT"
                                        Style="{StaticResource BodyTextStyle}"
                                        Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding StoreNIT, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding StoreNIT, UpdateSourceTrigger=PropertyChanged}"
                                      Padding="10"
                                      FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Dirección -->
-                        <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,10">
-                            <TextBlock Text="Dirección"
+                            <!-- Dirección -->
+                            <StackPanel Grid.Row="1" Grid.Column="0" Margin="0,0,0,10">
+                                <TextBlock Text="Dirección"
                                        Style="{StaticResource BodyTextStyle}"
                                        Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding StoreAddress, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding StoreAddress, UpdateSourceTrigger=PropertyChanged}"
                                      Padding="10"
                                      FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Teléfono -->
-                        <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,10">
-                            <TextBlock Text="Teléfono"
+                            <!-- Teléfono -->
+                            <StackPanel Grid.Row="1" Grid.Column="2" Margin="0,0,0,10">
+                                <TextBlock Text="Teléfono"
                                        Style="{StaticResource BodyTextStyle}"
                                        Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding StorePhone, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding StorePhone, UpdateSourceTrigger=PropertyChanged}"
                                      Padding="10"
                                      FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </Border>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
 
-            <!-- ============================================ -->
-            <!-- SECCIÓN: CAJA                               -->
-            <!-- ============================================ -->
-            <Border Grid.Row="2"
+                <!-- ============================================ -->
+                <!-- SECCIÓN: CAJA                               -->
+                <!-- ============================================ -->
+                <Border Grid.Row="2"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="20"
                     Margin="0,0,0,15"
                     CornerRadius="8">
-                <StackPanel>
-                    <TextBlock Text="🏧 Configuración de Caja"
+                    <StackPanel>
+                        <TextBlock Text="🏧 Configuración de Caja"
                                Style="{StaticResource SubtitleTextStyle}"
                                Margin="0,0,0,15"/>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
 
-                        <!-- Nombre del cajero -->
-                        <StackPanel Grid.Column="0">
-                            <TextBlock Text="Nombre del cajero"
+                            <!-- Nombre del cajero -->
+                            <StackPanel Grid.Column="0">
+                                <TextBlock Text="Nombre del cajero"
                                        Style="{StaticResource BodyTextStyle}"
                                        Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding CashierName, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding CashierName, UpdateSourceTrigger=PropertyChanged}"
                                      Padding="10"
                                      FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Número de caja -->
-                        <StackPanel Grid.Column="2">
-                            <TextBlock Text="Número de caja"
+                            <!-- Número de caja -->
+                            <StackPanel Grid.Column="2">
+                                <TextBlock Text="Número de caja"
                                        Style="{StaticResource BodyTextStyle}"
                                        Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding CashRegisterNumber, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding CashRegisterNumber, UpdateSourceTrigger=PropertyChanged}"
                                      Padding="10"
                                      FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </Border>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
 
-            <!-- ============================================ -->
-            <!-- SECCIÓN: IMPRESIÓN                          -->
-            <!-- ============================================ -->
-            <Border Grid.Row="3"
+                <!-- ============================================ -->
+                <!-- SECCIÓN: IMPRESIÓN                          -->
+                <!-- ============================================ -->
+                <Border Grid.Row="3"
         Background="{StaticResource SurfaceBrush}"
         Padding="20"
         Margin="0,0,0,15"
         CornerRadius="8">
-                <Border.Resources>
-                    <BooleanToVisibilityConverter x:Key="BoolToVis"/>
-                </Border.Resources>
+                    <Border.Resources>
+                        <BooleanToVisibilityConverter x:Key="BoolToVis"/>
+                    </Border.Resources>
 
-                <StackPanel>
-                    <TextBlock Text="🖨️ Configuración de Impresión"
+                    <StackPanel>
+                        <TextBlock Text="🖨️ Configuración de Impresión"
                    Style="{StaticResource SubtitleTextStyle}"
                    Margin="0,0,0,15"/>
 
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*"/>
-                            <ColumnDefinition Width="20"/>
-                            <ColumnDefinition Width="*"/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto"/>
-                            <!-- Tipo + AutoPrint -->
-                            <RowDefinition Height="Auto"/>
-                            <!-- Campo condicional -->
-                            <RowDefinition Height="Auto"/>
-                            <!-- Pie de factura -->
-                        </Grid.RowDefinitions>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="20"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <!-- Tipo + AutoPrint -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Campo condicional -->
+                                <RowDefinition Height="Auto"/>
+                                <!-- Pie de factura -->
+                            </Grid.RowDefinitions>
 
-                        <!-- Tipo de conexión -->
-                        <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
-                            <TextBlock Text="Tipo de conexión"
+                            <!-- Tipo de conexión -->
+                            <StackPanel Grid.Row="0" Grid.Column="0" Margin="0,0,0,10">
+                                <TextBlock Text="Tipo de conexión"
                            Style="{StaticResource BodyTextStyle}"
                            Margin="0,0,0,5"/>
-                            <ComboBox ItemsSource="{Binding PrinterTypes}"
+                                <ComboBox ItemsSource="{Binding PrinterTypes}"
                           SelectedItem="{Binding PrinterType}"
                           Padding="10"
                           FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Imprimir automáticamente -->
-                        <StackPanel Grid.Row="0" Grid.Column="2"
+                            <!-- Imprimir automáticamente -->
+                            <StackPanel Grid.Row="0" Grid.Column="2"
                         Orientation="Horizontal"
                         VerticalAlignment="Bottom"
                         Margin="0,0,0,10">
-                            <CheckBox IsChecked="{Binding AutoPrint}"
+                                <CheckBox IsChecked="{Binding AutoPrint}"
                           VerticalAlignment="Center"
                           Margin="0,0,10,0"/>
-                            <TextBlock Text="Imprimir automáticamente al finalizar la venta"
+                                <TextBlock Text="Imprimir automáticamente al finalizar la venta"
                            Style="{StaticResource BodyTextStyle}"
                            VerticalAlignment="Center"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Campo condicional: USB — nombre en "Dispositivos e impresoras" -->
-                        <StackPanel Grid.Row="1" Grid.Column="0"
+                            <!-- Campo condicional: USB — nombre en "Dispositivos e impresoras" -->
+                            <StackPanel Grid.Row="1" Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Margin="0,0,0,10"
                         Visibility="{Binding IsUsbPrinter, Converter={StaticResource BoolToVis}}">
-                            <TextBlock Text="Nombre de la impresora (tal como aparece en Dispositivos e impresoras)"
+                                <TextBlock Text="Nombre de la impresora (tal como aparece en Dispositivos e impresoras)"
                            Style="{StaticResource BodyTextStyle}"
                            Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding PrinterName, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding PrinterName, UpdateSourceTrigger=PropertyChanged}"
                          Padding="10"
                          FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Campo condicional: Serial — puerto COM -->
-                        <StackPanel Grid.Row="1" Grid.Column="0"
+                            <!-- Campo condicional: Serial — puerto COM -->
+                            <StackPanel Grid.Row="1" Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Margin="0,0,0,10"
                         Visibility="{Binding IsSerialPrinter, Converter={StaticResource BoolToVis}}">
-                            <TextBlock Text="Puerto serial (ej: COM3)"
+                                <TextBlock Text="Puerto serial (ej: COM3)"
                            Style="{StaticResource BodyTextStyle}"
                            Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding PrinterPort, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding PrinterPort, UpdateSourceTrigger=PropertyChanged}"
                          Padding="10"
                          FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Campo condicional: Network — dirección IP -->
-                        <StackPanel Grid.Row="1" Grid.Column="0"
+                            <!-- Campo condicional: Network — dirección IP -->
+                            <StackPanel Grid.Row="1" Grid.Column="0"
                         Grid.ColumnSpan="3"
                         Margin="0,0,0,10"
                         Visibility="{Binding IsNetworkPrinter, Converter={StaticResource BoolToVis}}">
-                            <TextBlock Text="Dirección de red (ej: 192.168.1.100:9100)"
+                                <TextBlock Text="Dirección de red (ej: 192.168.1.100:9100)"
                            Style="{StaticResource BodyTextStyle}"
                            Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding NetworkAddress, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding NetworkAddress, UpdateSourceTrigger=PropertyChanged}"
                          Padding="10"
                          FontSize="{StaticResource FontSizeNormal}"/>
-                        </StackPanel>
+                            </StackPanel>
 
-                        <!-- Mensaje pie de factura — siempre visible -->
-                        <StackPanel Grid.Row="2" Grid.Column="0"
+                            <!-- Mensaje pie de factura — siempre visible -->
+                            <StackPanel Grid.Row="2" Grid.Column="0"
                         Grid.ColumnSpan="3">
-                            <TextBlock Text="Mensaje pie de factura"
+                                <TextBlock Text="Mensaje pie de factura"
                            Style="{StaticResource BodyTextStyle}"
                            Margin="0,0,0,5"/>
-                            <TextBox Text="{Binding ReceiptFooterMessage, UpdateSourceTrigger=PropertyChanged}"
+                                <TextBox Text="{Binding ReceiptFooterMessage, UpdateSourceTrigger=PropertyChanged}"
                          Padding="10"
                          FontSize="{StaticResource FontSizeNormal}"
                          MaxLength="200"/>
-                        </StackPanel>
-                    </Grid>
-                </StackPanel>
-            </Border>
+                            </StackPanel>
+                        </Grid>
+                    </StackPanel>
+                </Border>
 
-            <!-- ============================================ -->
-            <!-- BOTÓN GUARDAR                               -->
-            <!-- ============================================ -->
-            <Border Grid.Row="4"
+                <!-- ============================================ -->
+                <!-- BOTÓN GUARDAR                               -->
+                <!-- ============================================ -->
+                <Border Grid.Row="4"
                     Background="{StaticResource SurfaceBrush}"
                     Padding="20"
                     CornerRadius="8">
-                <Button Content="💾 Guardar Configuración"
+                    <Button Content="💾 Guardar Configuración"
                         Style="{StaticResource PrimaryButton}"
                         HorizontalAlignment="Right"
                         Padding="20,10"
                         Command="{Binding SaveCommand}"/>
-            </Border>
+                </Border>
 
-        </Grid>
-    </ScrollViewer>
+            </Grid>
+        </ScrollViewer>
+        <controls:BusyOverlay IsBusy="{Binding IsBusy}"
+                       BusyMessage="{Binding BusyMessage}"/>
+    </Grid>
 </UserControl>

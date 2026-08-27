@@ -13,4 +13,3 @@ public partial class InvoiceDetailView : UserControl
         DataContext = viewModel;
     }
 }
-

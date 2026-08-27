@@ -22,10 +22,6 @@ msbuild.wrn
 *.sln.docstates
 *.vssscc
 
-# Rider / JetBrains
-.idea/
-*.sln.iml
-
 # VS Code (opcional, quítalo si versionas configuración compartida)
 .vscode/
 
@@ -57,6 +53,7 @@ publish/
 PublishProfiles/
 *.pubxml
 *.pubxml.user
+Releases/
 
 ## Logs ##
 *.log

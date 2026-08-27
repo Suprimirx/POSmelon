@@ -15,4 +15,3 @@ public partial class SaleView : UserControl
         Loaded += async (s, e) => await viewModel.InitializeAsync();
     }
 }
-

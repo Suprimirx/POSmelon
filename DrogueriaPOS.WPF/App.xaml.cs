@@ -4,8 +4,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System.IO;
 using System.Windows;
+using Velopack;
 
 
 namespace DrogueriaPOS.WPF;
@@ -19,11 +19,14 @@ public partial class App : System.Windows.Application
 
     public App()
     {
+
+        VelopackApp.Build().Run();
+
         _host = Host.CreateDefaultBuilder()
             .ConfigureAppConfiguration((context, config) =>
             {
                 // Cargar configuración desde appsettings.json
-                config.SetBasePath(Directory.GetCurrentDirectory());
+                config.SetBasePath(AppContext.BaseDirectory);
                 config.AddJsonFile("appsettings.json", optional: false, reloadOnChange: true);
             })
             .ConfigureServices((context, services) =>

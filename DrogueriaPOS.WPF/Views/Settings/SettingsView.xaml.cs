@@ -15,4 +15,3 @@ public partial class SettingsView : UserControl
         Loaded += async (s, e) => await viewModel.InitializeAsync();
     }
 }
-

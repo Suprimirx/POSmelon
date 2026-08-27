@@ -1,6 +1,7 @@
 ﻿using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using DrogueriaPOS.Application.Services;
+using DrogueriaPOS.Application.Services.Interfaces;
 using DrogueriaPOS.WPF.Services.Interfaces;
 using DrogueriaPOS.WPF.ViewModels.Base;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,6 +13,7 @@ public partial class MainViewModel : BaseViewModel
 {
     private readonly INavigationService _navigationService;
     private readonly IServiceScopeFactory _scopeFactory;
+    private readonly IUpdateService _updateService;
 
     [ObservableProperty]
     private object _currentView; // Vista actual que se muestra en el área de contenido
@@ -23,15 +25,20 @@ public partial class MainViewModel : BaseViewModel
     private string _currentModule; // Módulo actualmente seleccionado
     [ObservableProperty]
     private bool _isSessionOpen;
+    [ObservableProperty]
+    [NotifyCanExecuteChangedFor(nameof(CheckForUpdatesCommand))]
+    private bool _isCheckingForUpdates;
 
     public MainViewModel(
         IDialogService dialogService,
         INavigationService navigationService,
-        IServiceScopeFactory scopeFactory)
+        IServiceScopeFactory scopeFactory,
+        IUpdateService updateService)
         : base(dialogService)
     {
         _navigationService = navigationService;
         _scopeFactory = scopeFactory;
+        _updateService = updateService;
 
         Title = "Sistema POS - Droguería";
         IsMenuExpanded = true;
@@ -47,6 +54,10 @@ public partial class MainViewModel : BaseViewModel
         await LoadCashierNameAsync();
         await CheckActiveSessionAsync();
         await NavigateToSaleAsync();// vista inicial
+
+        // No se espera (fire-and-forget controlado): no debe retrasar la apertura de la app,
+        // y si falla (sin internet, GitHub no disponible), no debe impedir el uso normal del POS.
+        _ = CheckForUpdatesSilentlyAsync();
     }
 
     [RelayCommand]
@@ -137,6 +148,64 @@ public partial class MainViewModel : BaseViewModel
 
         if (confirmed && window != null)
             window.Close();
+    }
+
+    // Comando manual, pensado para un botón "Buscar actualizaciones" en Configuración.
+    // CanExecute evita doble-click mientras ya hay una revisión en curso.
+    [RelayCommand(CanExecute = nameof(CanCheckForUpdates))]
+    private async Task CheckForUpdatesAsync()
+    {
+        IsCheckingForUpdates = true;
+        try
+        {
+            var result = await _updateService.CheckForUpdatesAsync();
+
+            if (!result.IsUpdateAvailable)
+            {
+                ShowConfirmation(
+                    "Ya tienes la última versión instalada.",
+                    "Actualizaciones");
+                return;
+            }
+
+            await PromptInstallUpdateAsync(result);
+        }
+        finally
+        {
+            IsCheckingForUpdates = false;
+        }
+    }
+
+    private bool CanCheckForUpdates() => !IsCheckingForUpdates;
+
+    // Revisión silenciosa al iniciar: si hay actualización, sí se le pregunta al usuario
+    // (nunca se instala sin confirmación, para no interrumpir una venta sin avisar).
+    private async Task CheckForUpdatesSilentlyAsync()
+    {
+        try
+        {
+            var result = await _updateService.CheckForUpdatesAsync();
+            if (!result.IsUpdateAvailable) return;
+
+            await PromptInstallUpdateAsync(result);
+        }
+        catch
+        {
+            // Sin internet, GitHub no disponible, etc. — no debe interrumpir el uso normal del POS.
+        }
+    }
+
+    private async Task PromptInstallUpdateAsync(UpdateCheckResult update)
+    {
+        var confirmed = ShowConfirmation(
+            $"Hay una nueva versión disponible ({update.Version}). " +
+            "La aplicación se cerrará y se reiniciará para instalarla. ¿Deseas continuar?",
+            "Actualización disponible");
+
+        if (!confirmed) return;
+
+        await _updateService.DownloadAndApplyUpdateAsync(update);
+        // ApplyUpdatesAndRestart cierra el proceso actual; el código después de esta línea no se ejecuta.
     }
 
     private async void OnNavigated(object sender, object view)

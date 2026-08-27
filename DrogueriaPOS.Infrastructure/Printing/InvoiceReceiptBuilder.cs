@@ -115,5 +115,3 @@ internal class InvoiceReceiptBuilder
     private static string Truncate(string text, int max) =>
         text.Length <= max ? text : text[..max];
 }
-    
-
